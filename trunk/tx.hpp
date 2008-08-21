@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <queue>
 #include <sstream>
+#include <climits>
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
