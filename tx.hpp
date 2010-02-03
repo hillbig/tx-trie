@@ -7,15 +7,9 @@
 #include <algorithm>
 #include <queue>
 #include <sstream>
-#include <climits>
-
-#ifdef HAVE_SYS_TYPES_H
+#include <limits.h>
 #include <sys/types.h>
-#endif
-
-#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
-#endif
 
 #include "ssv.hpp"
 
@@ -61,8 +55,6 @@ namespace tx_tool{
     std::ostringstream errorLog;
 
     bool no_delete;
-
-
   };
 
 }

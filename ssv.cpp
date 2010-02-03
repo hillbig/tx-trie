@@ -7,8 +7,8 @@ namespace tx_tool{
     if (resize(_size) == -1) return;
   }
 
-  ssv::ssv(std::vector<bool>& bv){
-    no_delete = false;
+  ssv::ssv(std::vector<bool>& bv):
+    B(NULL),size(0),oneNum(0),levelL(NULL),levelM(NULL), no_delete(false){
     if (resize((uint)bv.size()) == -1) return;
     for (uint i = 0; i < (uint)bv.size(); i++){
       setBit(i,bv[i]);
@@ -16,6 +16,7 @@ namespace tx_tool{
   }
 
   int ssv::resize(const uint _size){
+    free();
     size = _size;
     blockSize = size/SSV_BLOCK + 1;
     isBuild = false;
@@ -35,13 +36,19 @@ namespace tx_tool{
 
   void ssv::free(){
     if (!no_delete){
-      delete[] B; 
-      B=NULL;
+      if (B){
+	delete[] B; 
+	B=NULL;
+      }
     }
-    delete[] levelL; 
-    levelL=NULL;
-    delete[] levelM;
-    levelM=NULL;
+    if (levelL){
+      delete[] levelL; 
+      levelL=NULL;
+    }
+    if (levelM){
+      delete[] levelM;
+      levelM=NULL;
+    }
   }
 
   ssv::~ssv(){
@@ -170,6 +177,7 @@ namespace tx_tool{
     if (resize(size) == -1){
       return -1;
     }
+
     if (fread(B,sizeof(uint),blockSize,infp) != blockSize){
       return -1;
     }
