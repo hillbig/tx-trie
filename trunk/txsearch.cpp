@@ -24,6 +24,9 @@ int main(int argc, char* argv[]){
     putchar('>');
     getline(cin,query);
     if (query.size() == 0) break;
+
+    printf("query:%s\n", query.c_str());
+    printf("%d\n", (int)query.size());
 		
     // prefixSearch
     {

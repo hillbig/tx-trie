@@ -45,7 +45,9 @@ namespace tx_tool{
     }
 	
     std::queue<queue_elem> q;
-    q.push(queue_elem(0,keyNum,0));
+    if (keyNum != 0){
+      q.push(queue_elem(0,keyNum,0));
+    }
     if (fwrite(&keyNum,sizeof(int),1,outfp) != 1){
       errorLog << "fwrite error " << std::endl;
       return -1;
@@ -161,11 +163,13 @@ namespace tx_tool{
       return -1;
     }
 
-    edge = new char [nodeNum-1];
-    if (fread(edge,sizeof(char),nodeNum-1,infp) != nodeNum-1){
-      errorLog << "fseek error" << std::endl;
-      fclose(infp);
-      return -1;
+    if (nodeNum > 0){
+      edge = new char [nodeNum-1];
+      if (fread(edge,sizeof(char),nodeNum-1,infp) != nodeNum-1){
+	errorLog << "fseek error" << std::endl;
+	fclose(infp);
+	return -1;
+      }
     }
 
     loud.read(infp);
@@ -194,6 +198,8 @@ namespace tx_tool{
   uint tx::prefixSearch(const char* str, const size_t len, size_t& retLen) const {
     uint curPos = 2;
     uint retId = NOTFOUND;
+    if (terminal.getSize() <= 2) return retId;
+
     for (size_t i = 0 ; ; i++){
       const uint nodeId = loud.rank(curPos-1,1)-1;
       if (terminal.getBit(nodeId)){
@@ -213,6 +219,7 @@ namespace tx_tool{
   uint tx::expandSearch(const char* str, const size_t len, std::vector<std::string>& ret, const uint limit) const {
     ret.clear();
     if (limit == 0) return 0;
+    if (terminal.getSize() <= 2) return 0;
 
     bool prefix = false;
     uint curPos = 2;
@@ -246,6 +253,7 @@ namespace tx_tool{
     ret.clear();
     retID.clear();
     if (limit == 0) return 0;
+    if (terminal.getSize() <= 2) return 0;
 
     uint curPos = 2;
 
@@ -271,6 +279,7 @@ namespace tx_tool{
     retLen.clear();
     retID.clear();
     if (limit == 0) return 0;
+    if (terminal.getSize() <= 2) return 0;
 
     uint curPos = 2;
     for (size_t i = 0; ; i++){
@@ -297,6 +306,7 @@ namespace tx_tool{
     ret.clear();
     retID.clear();
     if (limit == 0) return 0;
+    if (terminal.getSize() <= 2) return 0;
     
     bool prefix = false;
     uint curPos = 2;
@@ -326,6 +336,7 @@ namespace tx_tool{
     retLen.clear();
     retID.clear();
     if (limit == 0) return 0;
+    if (terminal.getSize() <= 2) return 0;
     
     bool prefix = false;
     uint curPos = 2;
@@ -396,6 +407,7 @@ namespace tx_tool{
   uint tx::reverseLookup(const uint id, std::string& ret) const {
     ret.clear();
     if (id >= keyNum) return 0;
+    if (terminal.getSize() <= 2) return 0;
 
     const uint nodeId = terminal.select(id + 1, 1);
     char unused_c = 0;

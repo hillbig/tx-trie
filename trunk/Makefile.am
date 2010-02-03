@@ -7,7 +7,7 @@ libtx_la_SOURCES = \
 
 pkginclude_HEADERS = tx.hpp ssv.hpp
 
-bin_PROGRAMS = txsearch txbuild txsearch_mmap s2sbuild s2ssearch
+bin_PROGRAMS = txsearch txbuild txsearch_mmap s2sbuild s2ssearch txlist
 
 txsearch_CPPFLAGS = -D_REENTRANT
 txsearch_LDADD = libtx.la
@@ -28,3 +28,7 @@ s2sbuild_SOURCES = s2sbuild.cpp
 s2ssearch_CPPFLAGS = -D_REENTRANT
 s2ssearch_LDADD = libtx.la
 s2ssearch_SOURCES = s2ssearch.cpp
+
+txlist_CPPFLAGS = -D_REENTRANT
+txlist_LDADD = libtx.la
+txlist_SOURCES = txlist.cpp
