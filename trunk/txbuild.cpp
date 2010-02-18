@@ -19,6 +19,11 @@ int main(int argc, char* argv[]){
 
     std::string word;
     while (getline(ifs, word)){
+      // handle CR-LF
+      if (word.size() > 0 && word[word.size()-1] == '\r'){
+	word = word.substr(0, word.size()-1);
+      }
+      if (word == "") continue;
       wordList.push_back(word);
     }
   }
