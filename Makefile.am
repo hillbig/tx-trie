@@ -32,3 +32,10 @@ s2ssearch_SOURCES = s2ssearch.cpp
 txlist_CPPFLAGS = -D_REENTRANT
 txlist_LDADD = libtx.la
 txlist_SOURCES = txlist.cpp
+
+EXTRA_DIST = tx.pc.in
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = tx.pc
+
+

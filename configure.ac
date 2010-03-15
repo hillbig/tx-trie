@@ -2,10 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(tx, 0.15, daisuke.okanohara@gmail.com)
+AC_INIT(tx, 0.16, daisuke.okanohara@gmail.com)
 AC_CONFIG_SRCDIR([ssv.cpp])
 AC_CONFIG_HEADER([config.h])
-AM_INIT_AUTOMAKE(tx, 0.15)
+AM_INIT_AUTOMAKE(tx, 0.16)
 
 # Checks for programs.
 AC_PROG_CXX
@@ -36,5 +36,5 @@ if test x$CXX = xg++; then
   CPPFLAGS="$CPPFLAGS -g -Wall -Wformat=2 -pipe -Wno-sign-compare -D_FORTIFY_SOURCE=1 -Wcast-qual -Wcast-align -Wpointer-arith -Wwrite-strings -Woverloaded-virtual"
 fi
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile tx.pc])
 AC_OUTPUT
