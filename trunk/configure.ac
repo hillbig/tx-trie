@@ -2,10 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(tx, 0.16, daisuke.okanohara@gmail.com)
+AC_INIT(tx, 0.17, daisuke.okanohara@gmail.com)
 AC_CONFIG_SRCDIR([ssv.cpp])
 AC_CONFIG_HEADER([config.h])
-AM_INIT_AUTOMAKE(tx, 0.16)
+AM_INIT_AUTOMAKE(tx, 0.17)
 
 # Checks for programs.
 AC_PROG_CXX
