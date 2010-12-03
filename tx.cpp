@@ -244,7 +244,7 @@ namespace tx_tool{
     for (size_t i = 0; i < len; i++){
       uint nextPos = getChild(curPos,str[i]);      
       const uint nodeId = loud.rank(curPos-1,1)-1;
-      if (terminal.getBit(nodeId)){
+      if (terminal.getBit(nodeId) && ret.size() < limit){
 	ret.push_back(std::string(str,str+i));
       }
       
@@ -260,7 +260,7 @@ namespace tx_tool{
       std::vector<std::pair<size_t, std::pair<std::string, uint> > > ret_p;
       enumerateAll(curPos,curStr,ret_p); 
       sort(ret_p.begin(),ret_p.end());
-      for (size_t i = 0; i < ret_p.size() && i < limit; i++){
+      for (size_t i = 0; i < ret_p.size() && ret.size() < limit; i++){
 	ret.push_back(ret_p[i].second.first);
       }
     } 
